@@ -96,7 +96,7 @@ public class MainSimulator {
 
 	// 4,7,11
 	// 1,3,8
-	public static int agentType = 4;//7;
+	public static int agentType = 7;
 
 	/*
 	 * delayTypes: 0 = non, 1 = normal, 2 = uniform, 3 = Exponential 4 = Possion, 5

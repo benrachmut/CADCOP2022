@@ -34,21 +34,8 @@ public class AMDLS_V3 extends AMDLS_V2 {
 
 	@Override
 	public void updateAlgorithmName() {
-		String a = "AMDLS";
-		String b = "V3";
-		String c = "";
-		if (AMDLS_V1.typeDecision == 'A' || AMDLS_V1.typeDecision == 'a') {
-			c = "a";
-		}
 
-		if (AMDLS_V1.typeDecision == 'B' || AMDLS_V1.typeDecision == 'b') {
-			c = "b";
-		}
-
-		if (AMDLS_V1.typeDecision == 'C' || AMDLS_V1.typeDecision == 'c') {
-			c = "c";
-		}
-		AgentVariable.AlgorithmName = a +"_" + c;
+		AgentVariable.AlgorithmName = "LAMDLS";
 	}
 
 	@Override
@@ -67,32 +54,6 @@ public class AMDLS_V3 extends AMDLS_V2 {
 	}
 
 	protected boolean compute() {
-/*
-		if (this.rndStochasticInitial < stochasticInitial) {
-			if (firstFlag == false) {
-				this.myCounter = myCounter + 1;
-				this.valueAssignment = this.firstRandomVariable;
-				//releaseFutureMsgs();
-			}
-			firstFlag = true;
-			if (canSetColorFlag) {
-				chooseColor();
-				setAboveAndBelow();
-			}
-			if (consistentFlag && !canSetColorFlag) {
-
-				double rnd = this.stochasticDecisionRandom.nextDouble();
-				if (rnd < stochasticDecision) {
-					decideAndChange();
-				} else {
-					myCounter = myCounter + 1;
-				}
-			}
-
-			return true;
-
-		} else {
-*/
 			boolean flag = false;
 			if (canSetColorFlag) {
 				chooseColor();
@@ -103,23 +64,12 @@ public class AMDLS_V3 extends AMDLS_V2 {
 			if (flag || (consistentFlag && !canSetColorFlag)) {
 				double rnd = this.stochasticDecisionRandom.nextDouble();
 				if (rnd < stochasticDecision || flag) {
-					//releaseFutureMsgs();
 					decideAndChange();
 				} else {
 					myCounter = myCounter + 1;
 				}
 
 			}
-		
-			
-			
-			//}
-		/*
-		 * if (flag) { double rnd = rndStochastic.nextDouble(); if ( rnd < stochastic )
-		 * { releaseFutureMsgs_distributed(); this.valueAssignment =
-		 * this.firstRandomVariable; } }
-		 */
-
 		return true;
 	}
 
@@ -164,6 +114,7 @@ public class AMDLS_V3 extends AMDLS_V2 {
 		} else {
 			freq = "low";
 		}
+
 		// -------------------------
 		String t = "";
 		if (AMDLS_V1.typeDecision == 'A' || AMDLS_V1.typeDecision == 'a') {

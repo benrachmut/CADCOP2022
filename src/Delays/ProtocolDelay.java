@@ -38,9 +38,7 @@ public abstract class ProtocolDelay {
 			}else {
 				whichRandomDelay = rndDelayAnytime;
 			}
-			
-			
-			
+
 			return createDelay(whichRandomDelay);
 		}
 	}
