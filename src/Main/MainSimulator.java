@@ -19,16 +19,7 @@ import AgentsAbstract.AgentVariable;
 import AgentsAbstract.AgentVariableInference;
 import AgentsAbstract.Location;
 import Data.Data;
-import Delays.CreatorDelays;
-import Delays.CreatorDelaysDistancePoisson;
-import Delays.CreatorDelaysDistanceUniform;
-import Delays.CreatorDelaysExponential;
-import Delays.CreatorDelaysNone;
-import Delays.CreatorDelaysNormal;
-import Delays.CreatorDelaysPossion;
-import Delays.CreatorDelaysUniform;
-import Delays.CreatorMissingMsgDistance;
-import Delays.ProtocolDelay;
+import Delays.*;
 import Down.CreatorDown;
 import Down.CreatorDownNone;
 import Down.CreatorDownPoission;
@@ -90,25 +81,26 @@ public class MainSimulator {
 	/*
 	 * 1 = DSA-ASY; 2 = DSA-SY; 3 = MGM-ASY ; 4 = MGM-SY ; 5 = AMDLS_V1 ; 6 =
 	 * AMDLS_V2; 7 = AMDLS_V3; 8 = DSA_SDP-ASY ; 9 = DSA_SDP-SY ; 10 = MGM2-ASY ; 11
-	 * = MGM2-SY 12 = AMDLS_V4 send all ------- 100 = 101 = MaxSum-SY; 102 =
+	 * = MGM2-SY; 12 = AMDLS_V4 send all; 13 = CAMDLS_Naive
+	 *
+	 *  ------- 100 = 101 = MaxSum-SY; 102 =
 	 * MaxSum_split-SY; 103 = MaxSum-ASY; 104 = MaxSum_split-ASY;
 	 */
 
-	// 4,7,11
-	// 1,3,8
-	public static int agentType = 7;
+	// 13
+	public static int agentType = 13;
 
 	/*
 	 * delayTypes: 0 = non, 1 = normal, 2 = uniform, 3 = Exponential 4 = Possion, 5
-	 * = distancePois ,6 = distanceUniform ,7 = distanceMissingMsg ,
+	 * = distancePois ,6 = distanceUniform ,7 = distanceMissingMsg, 8 = OneInK
 	 */
-	public static int delayType = 5;
+	public static int delayType = 8;
 	/*
 	 * 1 = Random uniform; 2 = Graph Coloring; 3 = Scale Free Network
 	 */
-	public static int dcopBenchMark = 4;
+	public static int dcopBenchMark = 1;
 	// 1 = Random uniform
-	public static double dcopUniformP1 = 0.6;//0.1,0.6
+	public static double dcopUniformP1 = 0.2;//0.1,0.6
 	public static double dcopUniformP2 = 1;// Probability for two values in domain between neighbors to have constraints
 	public static int costLbUniform = 100;
 	public static int costUbUniform = 200;
@@ -548,6 +540,9 @@ public class MainSimulator {
 		}
 		if (delayType == 7) {
 			ans = new CreatorMissingMsgDistance();
+		}
+		if (delayType == 8){
+			ans = new CreatorDelayOneInK();
 		}
 		return ans;
 	}

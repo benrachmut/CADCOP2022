@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CreatorDelaysDistancePoisson extends CreatorDelaysMatrixDependenet{
+public class CreatorDelaysDistancePoisson extends CreatorDelaysMatrixDependent{
 	private double[] multipliers= {100,1000,2000,5000};
 
  

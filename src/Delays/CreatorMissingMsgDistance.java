@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CreatorMissingMsgDistance extends CreatorDelaysMatrixDependenet{
+public class CreatorMissingMsgDistance extends CreatorDelaysMatrixDependent{
 
 
  

@@ -8,11 +8,17 @@ public class ProtocolDelayOneInK extends ProtocolDelayMatrix {
 
     private int k;
     private Map<Integer, int[]> counterMap;
-
+    public static int k_public;
     public ProtocolDelayOneInK(boolean imperfectCommunicationScenario, boolean isTimeStamp, double gamma, int k) {
         super(imperfectCommunicationScenario, isTimeStamp, gamma);
         this.k = k;
+        k_public = k;
         counterMap = new HashMap<Integer, int[]>();
+    }
+
+    public ProtocolDelayOneInK(boolean isTimeStamp, double gamma, int k) {
+        this(true,isTimeStamp, gamma, k);
+
     }
 
 
@@ -98,11 +104,14 @@ public class ProtocolDelayOneInK extends ProtocolDelayMatrix {
 
     @Override
     protected boolean checkSpecificEquals(ProtocolDelay other) {
+        if (other instanceof ProtocolDelayOneInK){
+            return ((ProtocolDelayOneInK)other).k == this.k;
+        }
         return false;
     }
 
     @Override
     protected Double createDelay(Random r, int i, int j) {
-        return null;
+        return 0.0;
     }
 }
