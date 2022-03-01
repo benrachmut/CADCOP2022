@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class CreatorDelayOneInK extends CreatorDelaysMatrixDependent{
-    private int[] ks= {2,5,10,15,20,25,30,35};
+    private int[] ks= {1};
 
 
     @Override
@@ -17,7 +17,7 @@ public class CreatorDelayOneInK extends CreatorDelaysMatrixDependent{
     protected Collection<? extends ProtocolDelay> createCombinationsDelay(boolean isTimeStamp, double gamma) {
         List<ProtocolDelay> ans = new ArrayList<ProtocolDelay>();
         for (Integer k : ks) {
-            ans.add(new ProtocolDelayOneInK(isTimeStamp, 0, k));
+            ans.add(new ProtocolDelayOneInK(isTimeStamp, gamma, k));
         } // sigma
         return ans;
     }

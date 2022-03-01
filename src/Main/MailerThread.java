@@ -133,6 +133,8 @@ public class MailerThread extends Mailer implements Runnable {
 	 * @param msgsFromInbox
 	 */
 	protected void placeMsgsFromInboxInMessageBox(List<Msg> msgsFromInbox) {
+		algorithmMsgsCounterDeliver = algorithmMsgsCounterDeliver+msgsFromInbox.size();
+
 		for (Msg m : msgsFromInbox) {
 			boolean flag = false;
 			updateMailerClockUponMsgRecieved(m);
@@ -150,6 +152,7 @@ public class MailerThread extends Mailer implements Runnable {
 				
 				m.setTimeOfMsg(d);
 			}
+
 			if (!flag) {
 				changeMsgsCounter(m);
 				this.messageBox.add(m);
@@ -216,7 +219,6 @@ public class MailerThread extends Mailer implements Runnable {
 	}
 
 	private void shouldUpdateClockBecuaseNoMsgsRecieved() {
-
 		Msg<?> minTimeMsg = Collections.min(messageBox, new MsgsAgentTimeComparator());
 		long minTime = minTimeMsg.getTimeOfMsg();
 		// int oldTime = time;
@@ -224,6 +226,7 @@ public class MailerThread extends Mailer implements Runnable {
 		if (minTime > this.time) {
 			this.time = minTime;
 		}
+
 
 	}
 	/*

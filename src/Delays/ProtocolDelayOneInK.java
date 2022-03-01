@@ -12,8 +12,11 @@ public class ProtocolDelayOneInK extends ProtocolDelayMatrix {
     public ProtocolDelayOneInK(boolean imperfectCommunicationScenario, boolean isTimeStamp, double gamma, int k) {
         super(imperfectCommunicationScenario, isTimeStamp, gamma);
         this.k = k;
-        k_public = k;
+
         counterMap = new HashMap<Integer, int[]>();
+    }
+    public  void  updatePublicK(){
+        k_public = this.k;
     }
 
     public ProtocolDelayOneInK(boolean isTimeStamp, double gamma, int k) {
@@ -99,7 +102,7 @@ public class ProtocolDelayOneInK extends ProtocolDelayMatrix {
 
     @Override
     protected String getStringParamets() {
-        return "k";
+        return Integer.toString(this.k);
     }
 
     @Override

@@ -43,7 +43,9 @@ public abstract class Mailer {
 	protected Dcop dcop;
 	protected long terminationTime;
 	protected SortedMap<Long, Data> dataMap;
-	private Double algorithmMsgsCounter;
+	private Double algorithmMsgsCounterArrival;
+	protected Double algorithmMsgsCounterDeliver;
+
 	private Double anytimeMsgsCounter;
 	protected Map<NodeId, List<MsgAlgorithm>> recieversAlgortihmicMsgs;
 	protected Map<NodeId, List<MsgAnyTime>> recieversAnyTimeMsgs;
@@ -58,7 +60,8 @@ public abstract class Mailer {
 		super();
 		this.dcop = dcop;
 		this.protocol = protocol;
-		this.algorithmMsgsCounter = 0.0;
+		this.algorithmMsgsCounterArrival = 0.0;
+		this.algorithmMsgsCounterDeliver = 0.0;
 		this.anytimeMsgsCounter = 0.0;
 		this.protocol.setSeeds(dcopId);
 		this.messageBox = new ArrayList<Msg>();
@@ -152,7 +155,7 @@ public abstract class Mailer {
 
 	protected void changeMsgsCounter(Msg m) {
 		if (m instanceof MsgAlgorithm) {
-			this.algorithmMsgsCounter++;
+			this.algorithmMsgsCounterArrival++;
 		}
 		if (m instanceof MsgAnyTime) {
 			this.anytimeMsgsCounter++;
@@ -171,9 +174,7 @@ public abstract class Mailer {
 	
 	protected int createDelay(boolean isAlgorithmicMsg, int i, int j) {
 		Double d = ((ProtocolDelayMatrix)this.protocol.getDelay()).createDelay(isAlgorithmicMsg,i,j);
-		if (MainSimulator.isDcopCityDebug&&((i == 0 && j == 31) ||(i == 31 && j == 0))) {
-			System.out.println(d);
-		}
+
 		
 		if (d == null) {
 			return -1;
@@ -361,8 +362,12 @@ public abstract class Mailer {
 		return false;
 	}
 
-	public Double getAlgorithmMsgsCounter() {
-		return this.algorithmMsgsCounter;
+	public Double getAlgorithmMsgsCounterArrival() {
+		return this.algorithmMsgsCounterArrival;
+	}
+	public Double getAlgorithmMsgsCounterDeliver() {
+
+		return this.algorithmMsgsCounterDeliver;
 	}
 
 	public Double getAnytimeMsgsCounter() {

@@ -56,6 +56,7 @@ public class AMDLS_V3 extends AMDLS_V2 {
 	protected boolean compute() {
 			boolean flag = false;
 			if (canSetColorFlag) {
+
 				chooseColor();
 				setAboveAndBelow();
 				flag = true;
@@ -73,18 +74,7 @@ public class AMDLS_V3 extends AMDLS_V2 {
 		return true;
 	}
 
-	/*
-	 * protected void sendMsgs() { boolean sendAllTheTime =
-	 * AMDLS_V1.sendWhenMsgReceive && this.gotMsgFlag; boolean flag = false; if (
-	 * this.canSetColorFlag) { sendAMDLSColorMsgs(); boolean aboveConsistent =
-	 * isAboveConsistent(); boolean belowConsistent = isBelowConsistent(); if
-	 * (aboveConsistent && belowConsistent && allNeighborsHaveColor()) { flag =
-	 * true; } else { flag = false; } } if (sendAllTheTime || (this.consistentFlag
-	 * && !canSetColorFlag) || (flag)) { if (flag) { decideAndChange(); }
-	 * sendAMDLSmsgs(); }
-	 * 
-	 * }
-	 */
+
 	// done
 	@Override
 	public void updateAlgorithmHeader() {

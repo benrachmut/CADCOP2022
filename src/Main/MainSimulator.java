@@ -47,7 +47,7 @@ public class MainSimulator {
 	// public static int dividAtomicTime = 1;
 
 	public static int multiplicationTime = 1;// 2;
-	public static int howManyIterationForCalculation = 1000;// 10000;//100000; // sparse = 100,dense=100
+	public static int howManyIterationForCalculation = 10;// 10000;//100000; // sparse = 100,dense=100
 	private static Double[] convergeEximne = { };
 
 	// ------------------------------**any time**
@@ -63,14 +63,14 @@ public class MainSimulator {
 	public static int div = 1;
 
 	public static int start = 0;
-	public static int end = 100;
+	public static int end = 5;
 	public static int end_temp = start; // DO NOT CHANGE
-	public static long termination = 600000
+	public static long termination = 1000000;
 			;//30000007;
 	private static int everyHowManyExcel = 100;
 
 	// ------------------------------**PROBLEM MANGNITUDE**
-	public static int A = 50; // amount of agents
+	public static int A = 5; // amount of agents
 	private static int D = 10;
 
 	// public static int D = -1; // if D or costParameter < 0 use default
@@ -100,7 +100,7 @@ public class MainSimulator {
 	 */
 	public static int dcopBenchMark = 1;
 	// 1 = Random uniform
-	public static double dcopUniformP1 = 0.2;//0.1,0.6
+	public static double dcopUniformP1 = 1;//0.2,0.7
 	public static double dcopUniformP2 = 1;// Probability for two values in domain between neighbors to have constraints
 	public static int costLbUniform = 100;
 	public static int costUbUniform = 200;
@@ -131,9 +131,9 @@ public class MainSimulator {
 	public static boolean isCommunicationDebug = false;
 	public static boolean isSDPdebug = false;
 	// public static boolean isAMDLSdebug = true;
-	public static boolean isAMDLSDistributedDebug = false;
+	public static boolean isAMDLSDistributedDebug = true;
 	public static boolean isAnytimeThreadDebug = false;
-	public static boolean isAnytimeDebug = true;
+	public static boolean isAnytimeDebug = false;
 	public static boolean isMaxSumMailerDebug = false;
 	public static boolean isFactorGraphDebug = false;
 	public static boolean isMGM2Debug = false;
@@ -553,6 +553,10 @@ public class MainSimulator {
 		for (Dcop dcop : dcops) {
 			int protocolCounter = -1;
 			for (Protocol protocol : protocols) {
+				ProtocolDelay pd = protocol.getDelay();
+				if (pd instanceof ProtocolDelayOneInK){
+					((ProtocolDelayOneInK)pd).updatePublicK();
+				}
 				protocolCounter += 1;
 				Mailer mailer = getMailer(protocol, dcop);
 				dcop.dcopMeetsMailer(mailer);
