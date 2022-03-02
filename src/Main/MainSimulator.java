@@ -70,7 +70,7 @@ public class MainSimulator {
 	private static int everyHowManyExcel = 100;
 
 	// ------------------------------**PROBLEM MANGNITUDE**
-	public static int A = 5; // amount of agents
+	public static int A = 50; // amount of agents
 	private static int D = 10;
 
 	// public static int D = -1; // if D or costParameter < 0 use default
@@ -88,19 +88,19 @@ public class MainSimulator {
 	 */
 
 	// 13
-	public static int agentType = 13;
+	public static int agentType = 7;
 
 	/*
 	 * delayTypes: 0 = non, 1 = normal, 2 = uniform, 3 = Exponential 4 = Possion, 5
 	 * = distancePois ,6 = distanceUniform ,7 = distanceMissingMsg, 8 = OneInK
 	 */
-	public static int delayType = 8;
+	public static int delayType = 2;
 	/*
 	 * 1 = Random uniform; 2 = Graph Coloring; 3 = Scale Free Network
 	 */
 	public static int dcopBenchMark = 1;
 	// 1 = Random uniform
-	public static double dcopUniformP1 = 1;//0.2,0.7
+	public static double dcopUniformP1 = 0.2;//0.2,0.7
 	public static double dcopUniformP2 = 1;// Probability for two values in domain between neighbors to have constraints
 	public static int costLbUniform = 100;
 	public static int costUbUniform = 200;

@@ -54,9 +54,34 @@ public class AMDLS_V3 extends AMDLS_V2 {
 	}
 
 	protected boolean compute() {
+/*
+		if (this.rndStochasticInitial < stochasticInitial) {
+			if (firstFlag == false) {
+				this.myCounter = myCounter + 1;
+				this.valueAssignment = this.firstRandomVariable;
+				//releaseFutureMsgs();
+			}
+			firstFlag = true;
+			if (canSetColorFlag) {
+				chooseColor();
+				setAboveAndBelow();
+			}
+			if (consistentFlag && !canSetColorFlag) {
+
+				double rnd = this.stochasticDecisionRandom.nextDouble();
+				if (rnd < stochasticDecision) {
+					decideAndChange();
+				} else {
+					myCounter = myCounter + 1;
+				}
+			}
+
+			return true;
+
+		} else {
+*/
 			boolean flag = false;
 			if (canSetColorFlag) {
-
 				chooseColor();
 				setAboveAndBelow();
 				flag = true;
@@ -65,16 +90,38 @@ public class AMDLS_V3 extends AMDLS_V2 {
 			if (flag || (consistentFlag && !canSetColorFlag)) {
 				double rnd = this.stochasticDecisionRandom.nextDouble();
 				if (rnd < stochasticDecision || flag) {
+					//releaseFutureMsgs();
 					decideAndChange();
 				} else {
 					myCounter = myCounter + 1;
 				}
 
 			}
+
+
+
+			//}
+		/*
+		 * if (flag) { double rnd = rndStochastic.nextDouble(); if ( rnd < stochastic )
+		 * { releaseFutureMsgs_distributed(); this.valueAssignment =
+		 * this.firstRandomVariable; } }
+		 */
+
 		return true;
 	}
 
-
+	/*
+	 * protected void sendMsgs() { boolean sendAllTheTime =
+	 * AMDLS_V1.sendWhenMsgReceive && this.gotMsgFlag; boolean flag = false; if (
+	 * this.canSetColorFlag) { sendAMDLSColorMsgs(); boolean aboveConsistent =
+	 * isAboveConsistent(); boolean belowConsistent = isBelowConsistent(); if
+	 * (aboveConsistent && belowConsistent && allNeighborsHaveColor()) { flag =
+	 * true; } else { flag = false; } } if (sendAllTheTime || (this.consistentFlag
+	 * && !canSetColorFlag) || (flag)) { if (flag) { decideAndChange(); }
+	 * sendAMDLSmsgs(); }
+	 *
+	 * }
+	 */
 	// done
 	@Override
 	public void updateAlgorithmHeader() {
@@ -104,7 +151,6 @@ public class AMDLS_V3 extends AMDLS_V2 {
 		} else {
 			freq = "low";
 		}
-
 		// -------------------------
 		String t = "";
 		if (AMDLS_V1.typeDecision == 'A' || AMDLS_V1.typeDecision == 'a') {

@@ -79,7 +79,6 @@ public class AMDLS_V2 extends AMDLS_V1 {
 		}
 		this.myColor = currentColor;
 
-
 		if (MainSimulator.is2OptDebug|| MainSimulator.isAMDLSDistributedDebug) {
 			System.out.println("A_"+this.id+" color: "+this.myColor);
 		}
@@ -200,15 +199,10 @@ public class AMDLS_V2 extends AMDLS_V1 {
 			Integer colorN = ((MsgAMDLSColor) msgAlgorithm).getColor();
 			neighborColors.put(msgAlgorithm.getSenderId(), colorN);
 			if (this.myColor != null) {
-
 				if (this.myColor > colorN) {
-					if (!this.above.contains(colorN)) {
-						this.above.add(msgAlgorithm.getSenderId());
-					}
+					this.above.add(msgAlgorithm.getSenderId());
 				} else {
-					if (!this.below.contains(colorN)) {
-						this.below.add(msgAlgorithm.getSenderId());
-					}
+					this.below.add(msgAlgorithm.getSenderId());
 				}
 			}
 		}
